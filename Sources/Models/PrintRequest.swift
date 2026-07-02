@@ -34,7 +34,7 @@ public struct PrintRequest {
     /// `DateFormatter` format string used to render `time` in the footer.
     /// Defaults to time-only, e.g. "3:42 PM". Set this to customise, e.g.
     /// `PrintRequest.timeFormat = "MMM d, h:mm a"`.
-    public static var timeFormat: String = "MM:dd:yyyy HH:mm:ss"
+    public static var timeFormat: String = "yyyy-MM-dd HH:mm:ss"
 
     /// The election code, poll code and time joined for the footer line,
     /// e.g. "E-2024 | P-07 | 3:42 PM". Empty codes are skipped.
