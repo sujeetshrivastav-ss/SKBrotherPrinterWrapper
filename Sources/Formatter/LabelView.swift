@@ -45,15 +45,13 @@ final class LabelView: UIView {
         // Text
         let nameLabel     = makeLabel(request.name, font: .boldSystemFont(ofSize: 30), width: contentWidth)
         let addressLabel  = makeLabel(request.address, font: .systemFont(ofSize: 22), width: contentWidth)
-        let precinctLabel = makeLabel("Precinct: \(request.precinct)", font: .systemFont(ofSize: 22), width: contentWidth)
-        let ballotLabel   = makeLabel("Ballot Style: \(request.ballotStyle)", font: .systemFont(ofSize: 22), width: contentWidth)
-
-        var arranged: [UIView] = [qrImageView, nameLabel, addressLabel, precinctLabel, ballotLabel]
+        let precinctLabel = makeLabel("Precinct: \(request.precinct) | Ballot Style: \(request.ballotStyle)", font: .systemFont(ofSize: 22), width: contentWidth)
+        var arranged: [UIView] = [qrImageView, nameLabel, addressLabel, precinctLabel]
 
         // Footer: election code | poll code | time, on one pipe-separated line.
         let footer = request.footerLine
         if !footer.isEmpty {
-            arranged.append(makeLabel(footer, font: .systemFont(ofSize: 18), width: contentWidth))
+            arranged.append(makeLabel(footer, font: .systemFont(ofSize: 22), width: contentWidth))
         }
 
         let stack = UIStackView(arrangedSubviews: arranged)
