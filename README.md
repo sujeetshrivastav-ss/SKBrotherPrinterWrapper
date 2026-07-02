@@ -109,6 +109,16 @@ iOS 14+ the SDK never even sees the network). Add them to your **app's**
 > and the MFi `UISupportedExternalAccessoryProtocols` entry
 > (`com.brother.ptcbp`); they are **not** required for this network-only setup.
 
+## Example app
+
+A runnable demo lives in [`Example/DemoBrotherApp`](Example/DemoBrotherApp). It's a
+plain UIKit app that consumes this wrapper the same way your app will — as a
+**local Swift Package** (added via `File → Add Package Dependencies… → Add Local…`,
+pointing at the repo root). Open `Example/DemoBrotherApp/DemoBrotherApp.xcodeproj`,
+pick a simulator, and build; Xcode resolves the package and auto-embeds
+`BRLMPrinterKit.xcframework`. See `ViewController.swift` for search + print in
+practice, and its `Info.plist` for the required keys already filled in.
+
 ## Use — three calls, that's it
 
 ```swift
