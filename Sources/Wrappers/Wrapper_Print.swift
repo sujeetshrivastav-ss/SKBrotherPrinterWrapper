@@ -1,6 +1,6 @@
 //
 //  Wrapper_Print.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Builds QL print settings and sends one image to the driver. Mirrors
 //  `PrintImageFacade.printImageWithImage` from the reference demo, and reports

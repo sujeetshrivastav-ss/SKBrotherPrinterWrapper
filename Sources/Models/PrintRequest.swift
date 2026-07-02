@@ -1,6 +1,6 @@
 //
 //  PrintRequest.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  The data you hand to `PrinterManager.shared.print(request:from:)`.
 //

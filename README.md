@@ -1,4 +1,4 @@
-# BrotherPrinterWrapper
+# SKBrotherPrinterWrapper
 
 A small, drop-in UIKit module that wraps the **Brother `BRLMPrinterKit`** SDK so
 your app only ever talks to **one class: `PrinterManager`**.
@@ -7,40 +7,107 @@ It reuses the exact search / connect / print mechanism from the official
 *Brother Print SDK Demo* — just repackaged behind a clean facade.
 
 ```
-BrotherPrinterWrapper
-├── Core
-│   ├── PrinterManager.swift          ⭐ Public API – the only class you use
-│   ├── PrinterSession.swift          singleton holding the connected printer
-│   ├── BrotherPrinterEngine.swift    render → connect → print
-│   ├── NetworkPrinterSearcher.swift  de-duplicating network search
-│   ├── BrotherConfiguration.swift    model / paper / copies / duration
-│   └── PrinterLogger.swift
-├── Models
-│   ├── PrintRequest.swift            barcode + name + address + precinct + ballotStyle
-│   ├── PrinterInfo.swift
-│   ├── PrinterStatus.swift
-│   ├── PrinterError.swift            user-ready error messages
-│   └── PrinterPaper.swift            label sizes
-├── Formatter
-│   ├── LabelFormatter.swift          PrintRequest → 1:1 pixel bitmap
-│   ├── QRCodeGenerator.swift
-│   └── LabelView.swift               the on-screen / on-paper layout
-├── UI
-│   ├── PrinterSearchViewController.swift
-│   ├── PrintPreviewViewController.swift
-│   └── LoadingView.swift
-└── BrotherSDK
-    ├── Wrapper_Search.swift          BRLMPrinterSearcher.startNetworkSearch
-    ├── Wrapper_Connect.swift         BRLMPrinterDriverGenerator.open
-    └── Wrapper_Print.swift           driver.printImage(with:settings:)
+SKBrotherPrinterWrapper
+├── Package.swift                      SPM manifest (library + vendored xcframework)
+├── BrotherSDK
+│   └── BRLMPrinterKit.xcframework     Brother's SDK, vendored as a binary target
+└── Sources                            module `SKBrotherPrinterWrapper` (path: "Sources")
+    ├── Core
+    │   ├── PrinterManager.swift          ⭐ Public API – the only class you use
+    │   ├── PrinterSession.swift          singleton holding the connected printer
+    │   ├── BrotherPrinterEngine.swift    render → connect → print
+    │   ├── NetworkPrinterSearcher.swift  de-duplicating network search
+    │   ├── BrotherConfiguration.swift    model / paper / copies / duration
+    │   └── PrinterLogger.swift
+    ├── Models
+    │   ├── PrintRequest.swift            barcode + name + address + precinct + ballotStyle
+    │   ├── PrinterInfo.swift
+    │   ├── PrinterStatus.swift
+    │   ├── PrinterError.swift            user-ready error messages
+    │   └── PrinterPaper.swift            label sizes
+    ├── Formatter
+    │   ├── LabelFormatter.swift          PrintRequest → 1:1 pixel bitmap
+    │   ├── QRCodeGenerator.swift
+    │   └── LabelView.swift               the on-screen / on-paper layout
+    ├── UI
+    │   ├── PrinterSearchViewController.swift
+    │   ├── PrintPreviewViewController.swift
+    │   └── LoadingView.swift
+    └── Wrappers
+        ├── Wrapper_Search.swift          BRLMPrinterSearcher.startNetworkSearch
+        ├── Wrapper_Connect.swift         BRLMPrinterDriverGenerator.open
+        └── Wrapper_Print.swift           driver.printImage(with:settings:)
 ```
 
-## Install
+## Install (Swift Package Manager)
 
-1. Make sure your app already links **`BRLMPrinterKit.xcframework`** (same as the demo).
-2. Drag the whole `BrotherPrinterWrapper` folder into your Xcode target.
-3. Add the network/Bluetooth usage keys you already use for the SDK to `Info.plist`
-   (`NSLocalAddressUsageDescription`, `NSBonjourServices` = `_pdl-datastream._tcp` etc.).
+The Brother `BRLMPrinterKit.xcframework` ships **inside** this package as a binary
+target, so you don't link it separately — just add the package.
+
+**Xcode:** File → Add Package Dependencies… → paste the repo URL:
+
+```
+https://github.com/sujeetshrivastav-ss/SKBrotherPrinterWrapper.git
+```
+
+**Package.swift:**
+
+```swift
+dependencies: [
+    .package(url: "https://github.com/sujeetshrivastav-ss/SKBrotherPrinterWrapper.git", from: "1.0.0")
+],
+targets: [
+    .target(
+        name: "YourApp",
+        dependencies: ["SKBrotherPrinterWrapper"]
+    )
+]
+```
+
+Then in code:
+
+```swift
+import SKBrotherPrinterWrapper
+```
+
+Requirements: **iOS 14+**.
+
+## Required `Info.plist` keys
+
+Printer discovery uses **Bonjour over the local network**, which iOS gates behind
+a permission prompt. Without these keys the search returns **no printers** (and on
+iOS 14+ the SDK never even sees the network). Add them to your **app's**
+`Info.plist` (the package can't declare them for you):
+
+| Key | Type | Purpose |
+|-----|------|---------|
+| `NSLocalNetworkUsageDescription` | String | Message shown in the "allow local network access" prompt. |
+| `NSBonjourServices` | Array of String | The Bonjour service types used to find printers. |
+
+**Xcode UI:** select your target → **Info** tab → add:
+- **Privacy - Local Network Usage Description** → e.g. *"Used to find and connect to your Brother label printer on this network."*
+- **Bonjour services** (an Array) with these three items:
+  - `_pdl-datastream._tcp`
+  - `_printer._tcp`
+  - `_ipp._tcp`
+
+**Or paste directly into `Info.plist` (source):**
+
+```xml
+<key>NSLocalNetworkUsageDescription</key>
+<string>Used to find and connect to your Brother label printer on this network.</string>
+<key>NSBonjourServices</key>
+<array>
+    <string>_pdl-datastream._tcp</string>
+    <string>_printer._tcp</string>
+    <string>_ipp._tcp</string>
+</array>
+```
+
+> This build is **Wi-Fi / network only** — no Bluetooth. If you later add a
+> Bluetooth/BLE searcher, you'll also need `NSBluetoothAlwaysUsageDescription`
+> and the MFi `UISupportedExternalAccessoryProtocols` entry
+> (`com.brother.ptcbp`); they are **not** required for this network-only setup.
 
 ## Use — three calls, that's it
 
@@ -110,14 +177,11 @@ config.autoCut        = true
 
 ## "Everything else is private"
 
-In a single app target Swift `internal` symbols are still visible to your code,
-but **`PrinterManager` is the only documented entry point** — ignore the rest.
-
-To enforce it for real, compile this folder as its own **framework / Swift
-package**: only the types marked `public` (`PrinterManager`, `PrintRequest`,
-`PrinterInfo`, `PrinterError`, `PrinterStatus`, `PrinterPaper`,
-`BrotherConfiguration`) will be visible; every other class becomes inaccessible
-automatically. No code changes required.
+Because this ships as its own Swift package (module `SKBrotherPrinterWrapper`),
+only the types marked `public` (`PrinterManager`, `PrintRequest`, `PrinterInfo`,
+`PrinterError`, `PrinterStatus`, `PrinterPaper`, `BrotherConfiguration`) are
+visible to your app. Every other class is module-internal and inaccessible —
+**`PrinterManager` is the entry point** you use.
 
 ## Notes
 

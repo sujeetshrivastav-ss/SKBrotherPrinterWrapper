@@ -1,6 +1,6 @@
 //
 //  PrinterPaper.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Label sizes for the QL-820NWB. `dieCut29x90` is the 1.1" x 3.5" label this
 //  app uses. Pixel sizes are the printable area at 300 dpi and drive how large

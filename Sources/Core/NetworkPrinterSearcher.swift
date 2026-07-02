@@ -1,6 +1,6 @@
 //
 //  NetworkPrinterSearcher.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  De-duplicating wrapper around `Wrapper_Search`, used by the search screen.
 //

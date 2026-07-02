@@ -1,6 +1,6 @@
 //
 //  PrinterStatus.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Lightweight lifecycle state, surfaced through logging / callbacks.
 //

@@ -1,6 +1,6 @@
 //
 //  PrinterError.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Every failure the wrapper can produce, with a user-ready message.
 //

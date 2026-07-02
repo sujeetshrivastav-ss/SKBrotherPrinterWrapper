@@ -1,6 +1,6 @@
 //
 //  PrintPreviewViewController.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Shows exactly what will be printed (QR + details), a red/green connection
 //  dot, and a Print button. If no printer is connected, tapping Print opens the

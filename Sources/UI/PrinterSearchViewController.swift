@@ -1,6 +1,6 @@
 //
 //  PrinterSearchViewController.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Auto-searches the network, lists what it finds, and on selection stores the
 //  printer in the shared session (turning the dot green) then dismisses.

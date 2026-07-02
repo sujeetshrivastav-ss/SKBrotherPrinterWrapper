@@ -1,6 +1,6 @@
 //
 //  Wrapper_Connect.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Opens a live printer driver over Wi-Fi. Mirrors `PrinterConnectUtil`
 //  from the reference demo (a fresh channel is built from the IP each time).

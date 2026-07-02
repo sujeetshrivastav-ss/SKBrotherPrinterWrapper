@@ -1,6 +1,6 @@
 //
 //  BrotherConfiguration.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Fixed setup for this app: Brother QL-820NWB over Wi-Fi, 54mm continuous film.
 //  Tweak via `PrinterManager.shared.configuration` if needed.

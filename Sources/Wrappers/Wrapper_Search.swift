@@ -1,6 +1,6 @@
 //
 //  Wrapper_Search.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Direct, minimal wrapper around the SDK's network search. Mirrors
 //  `NetPrinterSearcher` from the reference demo.

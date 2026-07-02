@@ -1,0 +1,11 @@
+.DS_Store
+.build/
+Package.resolved
+DerivedData/
+
+# Ignore user-specific SwiftPM/Xcode state, but keep shared schemes so
+# the package builds out of the box for anyone who clones it.
+.swiftpm/configuration
+.swiftpm/xcode/package.xcworkspace/xcuserdata/
+xcuserdata/
+*.xcodeproj/xcuserdata/

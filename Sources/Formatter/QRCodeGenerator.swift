@@ -1,6 +1,6 @@
 //
 //  QRCodeGenerator.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Crisp, non-blurry QR codes via Core Image.
 //

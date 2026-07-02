@@ -1,6 +1,6 @@
 //
 //  LabelFormatter.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Turns a `PrintRequest` into a 1:1 pixel bitmap (no Retina scaling) sized to
 //  the loaded paper. For a die-cut label the content is centred on a canvas of

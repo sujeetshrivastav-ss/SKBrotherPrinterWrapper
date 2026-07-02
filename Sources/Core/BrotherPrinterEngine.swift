@@ -1,6 +1,6 @@
 //
 //  BrotherPrinterEngine.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Renders the label, connects to the QL-820NWB over Wi-Fi, prints, and
 //  reports back on the main thread. Combines the three SDK wrappers.

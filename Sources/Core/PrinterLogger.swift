@@ -1,6 +1,6 @@
 //
 //  PrinterLogger.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 
 import Foundation

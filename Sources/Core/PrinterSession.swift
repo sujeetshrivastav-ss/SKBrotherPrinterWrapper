@@ -1,6 +1,6 @@
 //
 //  PrinterSession.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  Holds the connected printer for the whole app. The red/green dot reads
 //  `isConnected`; observe `didChangeNotification` to repaint it.
@@ -14,7 +14,7 @@ final class PrinterSession {
     private init() {}
 
     /// Posted on the main thread whenever the connection changes.
-    static let didChangeNotification = Notification.Name("BrotherPrinterWrapper.sessionDidChange")
+    static let didChangeNotification = Notification.Name("SKBrotherPrinterWrapper.sessionDidChange")
 
     private(set) var connectedPrinter: PrinterInfo?
 

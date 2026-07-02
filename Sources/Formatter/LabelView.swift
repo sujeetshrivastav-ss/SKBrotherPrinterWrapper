@@ -1,6 +1,6 @@
 //
 //  LabelView.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  The visual layout of a label: QR code on top, details underneath. The same
 //  view is used both for the on-screen preview and for rendering the bitmap

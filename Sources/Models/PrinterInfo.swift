@@ -1,6 +1,6 @@
 //
 //  PrinterInfo.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  A discovered printer. Only the data we need to reconnect later (the IP
 //  address) is kept, exactly like the reference SDK which rebuilds a fresh

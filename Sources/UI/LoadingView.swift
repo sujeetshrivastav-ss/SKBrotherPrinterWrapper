@@ -1,6 +1,6 @@
 //
 //  LoadingView.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  A simple dimming overlay with a spinner and a message.
 //

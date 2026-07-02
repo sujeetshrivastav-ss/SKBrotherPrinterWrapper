@@ -1,6 +1,6 @@
 //
 //  PrinterManager.swift
-//  BrotherPrinterWrapper
+//  SKBrotherPrinterWrapper
 //
 //  ⭐ THE ONLY CLASS YOUR APP USES.
 //
