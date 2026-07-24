@@ -1,0 +1,5 @@
+---
+triple:          'arm64-apple-darwin'
+binary-path:     'ios-arm64_x86_64-simulator/BRLMPrinterKit.framework/BRLMPrinterKit'
+relocations:     []
+...
